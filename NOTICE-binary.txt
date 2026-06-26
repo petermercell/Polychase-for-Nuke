@@ -1,0 +1,30 @@
+THIRD-PARTY SOFTWARE NOTICES — Polychase-for-Nuke (binary distribution)
+=======================================================================
+
+Polychase-for-Nuke ships three native Nuke 17 plugins, each licensed under the
+GNU General Public License v3.0 (see LICENSE). The corresponding source for this
+release is the Source-code asset on the release page.
+
+Each plugin statically links its own set of third-party libraries. Because the
+set differs per plugin, the required third-party notices are provided per
+plugin, not as one combined list:
+
+  PolychaseTracker.so   ->  PolychaseTracker_copyright.txt
+  Motion2DB.so          ->  Motion2DB_copyright.txt   (+ LICENSE-TinyEXR.txt)
+  VisualizeFlowDB.so    ->  VisualizeFlowDB_copyright.txt
+
+Each *_copyright.txt file contains the full, verbatim license text and copyright
+notice for every third-party component compiled into that plugin. THIRD_PARTY_-
+LICENSES.md gives the per-plugin breakdown (which component is in which plugin),
+explains which build-tree components are deliberately NOT linked (and so carry
+no notice), and reproduces the full license texts in one place.
+
+Libraries provided by the Nuke host at load time (Foundry DDImage, Nuke's TBB,
+Nuke's Qt6, the USD/usg + Ndk libraries, and the system OpenGL) are linked by
+name and never redistributed, so they require no notice here.
+
+In short:
+  - GPL-3.0 project license ............ LICENSE
+  - per-plugin third-party notices ..... <Plugin>_copyright.txt
+  - per-plugin breakdown + full texts .. THIRD_PARTY_LICENSES.md
+  - TinyEXR / OpenEXR notice ........... LICENSE-TinyEXR.txt
