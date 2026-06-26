@@ -1,25 +1,29 @@
 {
     "name": "polychase",
+    "builtin-baseline": "84bab45d415d22042bd0b9081aea57f362da3f35",
     "dependencies": [
         {
             "name": "opencv4",
             "default-features": false,
-            "features": [
-                "png"
-            ]
+            "features": ["png"]
         },
         {
             "name": "embree",
             "default-features": false,
-            "features": [
-                "geometry-triangle",
-                "tasking-tbb"
-            ]
+            "features": ["geometry-triangle", "tasking-tbb"]
         },
         "eigen3",
         "fmt",
         "spdlog",
         "sqlite3",
-        "tbb"
+        "tbb",
+        "gflags",
+        "poselib"
+    ],
+    "overrides": [
+        {
+            "name": "tbb",
+            "version": "2021.13.0"
+        }
     ]
 }
