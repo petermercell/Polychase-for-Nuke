@@ -1,0 +1,20 @@
+
+cd /home/pm/Downloads/Polychase-for-Nuke-master/POLYCHASE_OG_260626
+
+NUKE_PY=/opt/Nuke17.0v1/python3.11
+
+rm -rf build
+
+cmake -B build -S . -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake" \
+  -DVCPKG_TARGET_TRIPLET=x64-linux \
+  -DVCPKG_OVERLAY_PORTS="$PWD/vcpkg-ports" \
+  -DVCPKG_OVERLAY_TRIPLETS="$PWD/vcpkg-triplets" \
+  -DPOLYCHASE_BUILD_PYTHON_MODULE=ON \
+  -DPYBIND11_FINDPYTHON=ON \
+  -DPython_EXECUTABLE="$NUKE_PY" \
+  -DPython_FIND_STRATEGY=LOCATION \
+  -DPython_INCLUDE_DIR=/opt/Nuke17.0v1/include/python3.11
+
+cmake --build build -j"$(nproc)"
