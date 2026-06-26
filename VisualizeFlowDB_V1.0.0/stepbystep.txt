@@ -1,0 +1,5 @@
+cmake -S . -B build \
+  -DNUKE_VERSION=17.0v1 \
+  -DPOLYCHASE_ROOT=$HOME/Documents/POLYCHASE/polychase
+cmake --build build -j
+
