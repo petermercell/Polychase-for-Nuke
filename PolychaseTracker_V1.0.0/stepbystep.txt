@@ -1,0 +1,26 @@
+
+cd /home/pm/Downloads/Polychase-for-Nuke-master/PolychaseTracker
+chmod +x build.sh
+POLYCHASE_DEBUG_LOG=ON ./build.sh
+
+/////
+
+# debug build (new-3D on)
+cd /home/pm/Downloads/Polychase-for-Nuke-master/PolychaseTracker
+rm -rf build
+POLYCHASE_DEBUG_LOG=ON ./build.sh
+
+# quiet build (new-3D on)
+cd /home/pm/Downloads/Polychase-for-Nuke-master/PolychaseTracker
+rm -rf build
+./build.sh
+
+/////
+
+
+# run the tests after a build
+ctest --test-dir build --output-on-failure
+
+/////
+
+NUKE_ROOT=/opt/Nuke17.0v1 POLYCHASE_NEW_3D=ON bash test/verify_build_paths.sh
