@@ -5,8 +5,8 @@ mesh that matches an object in the shot, it solves the object's (or camera's)
 motion from a prebuilt Polychase optical-flow database and exports an animated
 Camera or TransformGeo.
 
-The optical-flow database is built **outside** Nuke (by Motion2DB); 
-this node only reads a prebuilt `.db` and solves.
+The optical-flow database is built **outside** Nuke (by Motion2DB); this node
+only reads a prebuilt `.db` and solves.
 
 ![PolychaseTracker wireframe overlay in the viewer](PolychaseTracker.png)
 
@@ -21,14 +21,52 @@ this node only reads a prebuilt `.db` and solves.
 
 All inputs are optional and type-gated — Nuke greys out wires that don't match.
 
-## Workflow
+## Setup
 
 1. Connect `img` + `cam` + `geo`.
 2. Set the **Database** path to the `.db` built by Motion2DB.
-3. On the **first frame**, place pins in the Viewer and key the pose.
-4. Click **Track Forward** (or **Track Backwards**) to solve from that pose.
-5. Pick a **Solve Mode** (Camera or Model) and click **Export** to spawn an
-   animated Camera2 or TransformGeo carrying the tracked motion.
+
+Then follow the workflow that matches your shot — a **static (prime) lens** or a
+**zoom lens**.
+
+## Workflow — static lens
+
+1. On the **first frame**, set the wireframe position with the gizmo.
+2. Fine-tune the position with **Pins**.
+3. **Set Pose Key**.
+4. **Track Forward**.
+5. If the track drifts, adjust the offending frames — anchors are created
+   automatically where you correct it.
+6. **Set the refine range**.
+7. **Refine**.
+8. **Export**.
+
+## Workflow — zoom lens
+
+Solving a changing focal length only works **with user tracks**, so this path
+adds a Tracker node before solving. It's more involved than the static-lens
+workflow.
+
+1. On the **first frame**, set the wireframe position with the gizmo.
+2. Fine-tune the position with **Pins**.
+3. **Set Pose Key**.
+4. In the **User Tracks** tab, add a Tracker node, set the **reference frame**
+   (the first frame), and add **~±50 px overscan**.
+5. **Load Tracks**.
+6. **Connect**.
+7. In the **Intrinsics** tab, **Solve Focal** and tick **Export Solved Focal**.
+8. After solving, click **Copy Solved Focal → Camera**.
+9. Track forward — or, better for a zoom, set two keyframes (anchors) on the
+   **mid** and **last** frames.
+10. **Set the refine range**.
+11. **Refine**.
+12. **Export**.
+
+> 📹 A video walkthrough of the zoom-lens workflow is coming — it's the more
+> complex of the two.
+
+When the solve looks right, pick a **Solve Mode** (Camera or Model); **Export**
+spawns an animated Camera2 or TransformGeo carrying the tracked motion.
 
 ## Handy controls
 
