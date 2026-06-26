@@ -1,0 +1,21 @@
+
+
+cd ~/Documents/POLYCHASE/nuke_integration/MOTION2DB
+
+rm -rf build
+cmake -S . -B build -G Ninja \
+  -DCMAKE_CXX_COMPILER=$(scl enable gcc-toolset-13 'which g++')
+cmake --build build -j
+
+////
+
+# With progress bar (default):
+rm -rf build
+cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=$(scl enable gcc-toolset-13 'which g++')
+cmake --build build -j
+
+
+ldd ./Motion2DB.so
+readelf -d Motion2DB.so | grep NEEDED
+
+objdump -T Motion2DB.so | grep -c GLIBCXX     # still ~0 = your code's libstdc++ is static
