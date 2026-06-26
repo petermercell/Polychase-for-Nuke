@@ -106,4 +106,16 @@ Committed directly under `cpp/external/` with their own license files, and
 linked into the module:
 
 - **pybind11** — BSD-3-Clause — `cpp/external/pybind11/LICENSE`
-- **cvnp** — see `cpp/external/cvnp/LICENSE` (verify exact license)
+- **cvnp** — MIT (Copyright Pascal Thomet) — `cpp/external/cvnp/LICENSE`
+
+---
+
+## Note for binary releases
+
+When distributing the compiled module (e.g. as a GitHub Release asset), the
+permissive licenses above (Apache-2.0, MIT, BSD-3-Clause, MPL-2.0, libpng,
+Zlib) require their **full license text and copyright notices** to accompany
+the binary — naming them is not sufficient. Assemble the exact texts from the
+build tree (`build/vcpkg_installed/<triplet>/share/<port>/copyright`) plus the
+vendored `LICENSE` files, and ship that bundle next to the binary along with
+`COPYING` (GPL-3.0).
